@@ -36,3 +36,6 @@ Route::post('/register/moderator', 'App\Http\Controllers\Auth\RegisterController
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/admin', 'admin');
 Route::view('/moderator', 'moderator');
+
+
+Route::view('/ad', 'admin.home');
