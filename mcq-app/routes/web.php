@@ -34,8 +34,15 @@ Route::post('/register/admin', 'App\Http\Controllers\Auth\RegisterController@cre
 Route::post('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@createModerator');
 
 Route::view('/home', 'home')->middleware('auth');
-Route::view('/admin', 'admin');
 Route::view('/moderator', 'moderator');
 
+Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
+    Route::view('/', 'admin.pages.dashboard');
+    Route::resource('category', 'App\Http\Controllers\CategoryController');
+    Route::post('sub_category', 'App\Http\Controllers\CategoryController@storeSubCat')->name('sub_cat');
+    Route::post('sub_category/destroy{id}', 'App\Http\Controllers\CategoryController@destroySubCat')->name('sub_cat.destroy');
 
-Route::view('/ad', 'admin.home');
+    Route::resource('question', 'App\Http\Controllers\QuestionController');
+});
+// Route::view('/admin', 'admin.pages.dashboard');
+// Route::view('/admin/cat', 'admin.pages.category');

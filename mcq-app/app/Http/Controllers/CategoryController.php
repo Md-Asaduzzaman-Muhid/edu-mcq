@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Stevebauman\Purify\Facades\Purify;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories= Category::all();
+        $sub_categories= SubCategory::get();
+        return view('admin.pages.category')->with('categories',$categories)->with('sub_categories',$sub_categories);
     }
 
     /**
@@ -35,7 +39,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $cat = Purify::clean($request->all());
+        $category = new Category();
+        $category->name = $cat['category'];
+        $category->save();
+        return back()->with('success', 'Successfully Added Category');
     }
 
     /**
@@ -80,6 +89,27 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return back()->with('success', 'Successfully Added Category');
     }
+    public function storeSubCat(Request $request)
+    {
+
+        $subcat = Purify::clean($request->all());
+        // dd($subcat);
+        $subcategory = new SubCategory();
+        $subcategory->cat_id = $subcat['cat_id'];
+        $subcategory->name = $subcat['sub_category'];
+        
+        $subcategory->save();
+        return back()->with('success', 'Successfully Added Sub Category');
+    }
+    public function destroySubCat($id)
+    {
+        SubCategory::destroy($id);
+        $categories= Category::all();
+        $sub_categories= SubCategory::get();
+        return back()->with('success', 'Successfully Added Category');
+    }
+
 }

@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    use HasFactory;
+    protected $fillable = ['question','sub_cat_id','option_id','answer_id'];
+    public function option()
+    {
+        return $this->hasOne(Option::class);
+    }
+    public function answer()
+    {
+        return $this->hasOne(Answer::class);
+    }
 }
