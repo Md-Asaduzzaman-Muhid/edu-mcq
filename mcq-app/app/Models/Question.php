@@ -16,4 +16,8 @@ class Question extends Model
     {
         return $this->hasOne(Answer::class);
     }
+    public function subcategory()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

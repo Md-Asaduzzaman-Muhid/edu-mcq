@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Category;
+use App\Models\Option;
+use App\Models\Answer;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Stevebauman\Purify\Facades\Purify;
 
 class QuestionController extends Controller
 {
@@ -24,7 +29,14 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.question.add');
+        $categories= Category::all();
+        // $sub_categories= SubCategory::get();
+
+        // $categories = Category::find(1);
+
+        // dd($categories->subcategory()->get());
+
+        return view('admin.pages.question.add')->with('categories',$categories);
     }
 
     /**
@@ -35,7 +47,32 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quest = Purify::clean($request->all());
+        //  dd($quest);
+        $question = new Question();
+        $option = new Option();
+        $answer = new Answer();
+        // dd($option);
+        $question->question = $quest['question'];
+        // $question->option_id = $option->id;
+        // $question->answer_id = $answer->id;
+        $question->option->option_1= $quest['option_1'];
+        dd($question);
+        $option->option_1 = $quest['option_1'];
+        $option->option_2 = $quest['option_2'];
+        $option->option_3 = $quest['option_3'];
+        $option->option_4 = $quest['option_4'];
+        $answer->answer = $quest['answer'];
+        $answer->explanation = $quest['explanation'];
+
+        $answer->save();
+        $option->save();
+       
+        $question->option_id = $option->id;
+        $question->answer_id = $answer->id;
+        $question->save();
+        return back()->with('success', 'Successfully Added Category');
+
     }
 
     /**

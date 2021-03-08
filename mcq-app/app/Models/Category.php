@@ -13,5 +13,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\SubCategory', 'id');
     }
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
     // use HasFactory;
 }
