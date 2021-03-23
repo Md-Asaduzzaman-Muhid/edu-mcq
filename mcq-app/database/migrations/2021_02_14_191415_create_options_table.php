@@ -19,6 +19,7 @@ class CreateOptionsTable extends Migration
             $table->char('option_2', 100);
             $table->char('option_3', 100);
             $table->char('option_4', 100);
+            $table->bigInteger('question_id');
             $table->timestamps();
         });
     }

@@ -30,13 +30,8 @@ class QuestionController extends Controller
     public function create()
     {
         $categories= Category::all();
-        // $sub_categories= SubCategory::get();
-
-        // $categories = Category::find(1);
-
-        // dd($categories->subcategory()->get());
-
-        return view('admin.pages.question.add')->with('categories',$categories);
+        $sub_categories= SubCategory::all();
+        return view('admin.pages.question.add', compact(['categories', 'sub_categories']));
     }
 
     /**
@@ -50,27 +45,25 @@ class QuestionController extends Controller
         $quest = Purify::clean($request->all());
         //  dd($quest);
         $question = new Question();
-        $option = new Option();
-        $answer = new Answer();
-        // dd($option);
         $question->question = $quest['question'];
-        // $question->option_id = $option->id;
-        // $question->answer_id = $answer->id;
-        $question->option->option_1= $quest['option_1'];
-        dd($question);
-        $option->option_1 = $quest['option_1'];
-        $option->option_2 = $quest['option_2'];
-        $option->option_3 = $quest['option_3'];
-        $option->option_4 = $quest['option_4'];
-        $answer->answer = $quest['answer'];
-        $answer->explanation = $quest['explanation'];
-
-        $answer->save();
-        $option->save();
-       
-        $question->option_id = $option->id;
-        $question->answer_id = $answer->id;
+        $question->sub_cat_id = 1;
+        $question->cat_id = 1;
         $question->save();
+        $question->option()->create([
+            'option_1' =>  $quest['option_1'],
+            'option_2' =>  $quest['option_2'],
+            'option_3' =>  $quest['option_3'],
+            'option_4' =>  $quest['option_4']
+        ]);
+        $question->answer()->create([
+            'answer' =>  $quest['answer'],
+            'explanation' =>  $quest['explanation']
+        ]);
+        // foreach($quest['category'] as $qcat):
+        //     $question->category()->create([
+        //         'category_id' => $qcat
+        //     ]);
+        // endforeach;
         return back()->with('success', 'Successfully Added Category');
 
     }

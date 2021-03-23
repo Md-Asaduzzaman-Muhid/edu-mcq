@@ -6,29 +6,35 @@
             @csrf
             <div class="row">
                 <div class="col">
-                    <label for="option_1">Select Category</label>
+                    <!-- <label for="option_1">Select Category</label>
                     <select class="form-control" id="cat_id" name="cat_id" required>
                         <option value=""> -- Select Category -- </option>
                         <option value="1">One</option>
-                    </select>
+                    </select> -->
+                    <div class="form-group">
+                        <label><strong>Category :</strong></label><br>
+                        <label><input type="checkbox" name="category[]" value="0"> No category</label>
+                    @foreach($categories as $category)
+                        <label><input type="checkbox" name="category[]" value="{{$category->id}}"> {{$category->name}}</label>
+                        
+                    @endforeach
+                    </div>  
                 </div>
                 <div class="col">
-                    <label for="option_1">Select Sub Category</label>
+                    <!-- <label for="option_1">Select Sub Category</label>
                     <select class="form-control" id="sub_cat_id" name="sub_cat_id" required>
                         <option value=""> -- Select Sub Category -- </option>
                         <option value="1">One</option>
-                    </select>
+                    </select> -->
+
+                    <div class="form-group">
+                        <label><strong>Sub Category :</strong></label><br>
+                        <label><input type="checkbox" name="sub_category[]" value="0"> No Sub Category</label>
+                    @foreach($sub_categories as $sub_category)
+                        <label><input type="checkbox" name="sub_category[]" value="{{$sub_category->id}}"> {{$sub_category->name}}</label>
+                    @endforeach
+                    </div>
                 </div>
-           
-                <p>
-                @foreach($categories as $category)
-                    {{$category->name }}</br>
-                @endforeach
-                @foreach($category->subcategory as $sub)
-                    {{$sub->id}}</br>
-                @endforeach
-                </p>
-                
             </div>
             <div class="form-group">
                 <label for="question">Question</label>

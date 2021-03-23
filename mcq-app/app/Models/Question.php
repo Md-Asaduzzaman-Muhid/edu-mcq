@@ -18,6 +18,10 @@ class Question extends Model
     }
     public function subcategory()
     {
-        return $this->hasMany(Category::class);
+        return $this->morphToMany(SubCategory::class, 'categorie');
+    }
+    public function category()
+    {
+        return $this->morphToMany(Category::class, 'sub_categorie');
     }
 }
