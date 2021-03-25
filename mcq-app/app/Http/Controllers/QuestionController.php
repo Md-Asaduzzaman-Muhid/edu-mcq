@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Validator;
 use App\Models\Question;
 use App\Models\Category;
 use App\Models\Option;
@@ -47,10 +48,21 @@ class QuestionController extends Controller
     {
         $quest = Purify::clean($request->all());
         // dd($quest);
+
+        $validator = Validator::make($request->all(), [
+            'question' => 'required|max:500',
+            'option_1' => 'required|max:200',
+            'option_2' => 'required|max:200',
+            'option_3' => 'required|max:200',
+            'option_4' => 'required|max:200',
+            'explanation' => 'required|max:500',
+        ]);
+        if ($validator->fails()):
+            return back()->withErrors($validator->errors())->withInput();
+        endif;
+
         $question = new Question();
         $question->question = $quest['question'];
-        $question->sub_cat_id = 1;
-        $question->cat_id = 1;
         $question->save();
         if(!empty($quest['category'])):
             foreach($quest['category'] as $cat):
@@ -83,7 +95,8 @@ class QuestionController extends Controller
             'option_4' =>  $quest['option_4']
         ]);
         $question->answer()->create([
-            'answer' =>  $quest['answer'],
+          
+            'answer' =>  $quest['answer'] ?? 0,
             'explanation' =>  $quest['explanation']
         ]);
         return back()->with('success', 'Successfully Added Category');

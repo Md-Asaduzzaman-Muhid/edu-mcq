@@ -12,29 +12,16 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('/', 'welcome');
 Auth::routes();
 
 Route::get('/login/admin', 'App\Http\Controllers\Auth\LoginController@showAdminLoginForm');
-Route::get('/login/moderator', 'App\Http\Controllers\Auth\LoginController@showModeratorLoginForm');
+// Route::get('/login/moderator', 'App\Http\Controllers\Auth\LoginController@showModeratorLoginForm');
 Route::get('/register/admin', 'App\Http\Controllers\Auth\RegisterController@showAdminRegisterForm');
-Route::get('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@showModeratorRegisterForm');
+// Route::get('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@showModeratorRegisterForm');
 
-Route::post('/login/admin', 'App\Http\Controllers\Auth\LoginController@adminLogin');
-Route::post('/login/moderator', 'App\Http\Controllers\Auth\LoginController@ModeratorLogin');
-Route::post('/register/admin', 'App\Http\Controllers\Auth\RegisterController@createAdmin');
-Route::post('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@createModerator');
 
-Route::view('/home', 'home')->middleware('auth');
-Route::view('/moderator', 'moderator');
+Route::get('home', 'App\Http\Controllers\HomeController@userHome')->middleware('auth')->name('home');
 
 Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
     Route::view('/', 'admin.pages.dashboard');
@@ -44,5 +31,3 @@ Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
 
     Route::resource('question', 'App\Http\Controllers\QuestionController');
 });
-// Route::view('/admin', 'admin.pages.dashboard');
-// Route::view('/admin/cat', 'admin.pages.category');

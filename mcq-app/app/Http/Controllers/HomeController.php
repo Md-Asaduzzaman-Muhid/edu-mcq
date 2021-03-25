@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Question;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,13 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function userHome()
+    {
+        $categories= Category::all();
+       
+        $questions = Question::all();
+        //  dd($questions[0]->answer);
+        return view('user.home',compact(['categories','questions']));
     }
 }
