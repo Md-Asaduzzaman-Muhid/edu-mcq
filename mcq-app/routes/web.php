@@ -22,6 +22,8 @@ Route::get('/register/admin', 'App\Http\Controllers\Auth\RegisterController@show
 
 
 Route::get('home', 'App\Http\Controllers\HomeController@userHome')->middleware('auth')->name('home');
+Route::get('/test', 'App\Http\Controllers\TestController@index')->middleware('auth')->name('test');
+Route::get('/test/{catgory}', 'App\Http\Controllers\TestController@category')->middleware('auth')->name('test.category');
 
 Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
     Route::view('/', 'admin.pages.dashboard');

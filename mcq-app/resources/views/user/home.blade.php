@@ -27,10 +27,10 @@
 </section>
 <section class="question-section py-5">
     <div class="container">
+    <?php $i= 1; ?>
     @foreach($questions as $question)
-        <?php $i= 1; ?>
         <div class="question-single border border-dark rounded mb-4 p-4">
-            <h4>{{$i++ . '. ' . $question->question}}</h4>
+            <h4>{{$i++.'. '.$question->question}}</h4>
             <ol class="option-list" type="A">
                 <li class="pr-4 <?php if($question->answer->answer == 1): echo'text-success font-weight-bold'; endif; ?>">{{$question->option->option_1}}</li>
                 <li class="pr-4 <?php if($question->answer->answer == 2): echo'text-success font-weight-bold'; endif; ?>">>{{$question->option->option_2}}</li>

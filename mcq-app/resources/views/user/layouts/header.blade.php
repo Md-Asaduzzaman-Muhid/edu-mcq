@@ -18,10 +18,10 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">Home</a>
+                        <a href="{{ route('home') }}" class="nav-link ">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">Take A Test</a>
+                        <a href="{{ route('test') }}" class="nav-link ">Take A Test</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link ">Question Bank</a>

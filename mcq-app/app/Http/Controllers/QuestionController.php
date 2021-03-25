@@ -75,6 +75,13 @@ class QuestionController extends Controller
                 );
                 $i++;
             endforeach;
+        else:
+            DB::table('category_question')->insert(
+                ['category_id' => 1,
+                'question_id' => $question->id,
+                "created_at" =>  date('Y-m-d H:i:s'),
+                "updated_at" => date('Y-m-d H:i:s'),]
+            );
         endif;
         if(!empty($quest['sub_category'])):
             foreach($quest['sub_category'] as $sub_cat):
@@ -87,6 +94,13 @@ class QuestionController extends Controller
                 );
                 $i++;
             endforeach;
+        else:
+            DB::table('question_sub_category')->insert(
+                ['sub_category_id' => 1,
+                'question_id' => $question->id,
+                "created_at" =>  date('Y-m-d H:i:s'),
+                "updated_at" => date('Y-m-d H:i:s'),]
+            );
         endif;
         $question->option()->create([
             'option_1' =>  $quest['option_1'],
