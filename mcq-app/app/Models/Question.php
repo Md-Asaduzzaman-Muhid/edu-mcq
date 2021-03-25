@@ -16,12 +16,12 @@ class Question extends Model
     {
         return $this->hasOne(Answer::class);
     }
-    public function subcategory()
-    {
-        return $this->morphToMany(SubCategory::class, 'categorie');
-    }
-    public function category()
-    {
-        return $this->morphToMany(Category::class, 'sub_categorie');
-    }
+    // public function subcategory()
+    // {
+    //     return $this->belongsToMany(SubCategory::class, 'sub_category_question');
+    // }
+    // public function category()
+    // {
+    //     return $this->belongsToMany(Category::class, 'category_question');
+    // }
 }

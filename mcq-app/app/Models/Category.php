@@ -15,7 +15,7 @@ class Category extends Model
     }
     public function question()
     {
-        return $this->morphedByMany(SubCategory::class, 'categorie');
+        return $this->belongsToMany(Question::class);
     }
     // use HasFactory;
 }

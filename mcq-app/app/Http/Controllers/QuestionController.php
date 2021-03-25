@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Question;
 use App\Models\Category;
 use App\Models\Option;
@@ -19,7 +20,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.question.list');
+        $categories= Category::all();
+        $sub_categories= SubCategory::all();
+        return view('admin.pages.question.list',compact(['categories','sub_categories']));
     }
 
     /**
@@ -43,12 +46,36 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $quest = Purify::clean($request->all());
-        //  dd($quest);
+        // dd($quest);
         $question = new Question();
         $question->question = $quest['question'];
         $question->sub_cat_id = 1;
         $question->cat_id = 1;
         $question->save();
+        if(!empty($quest['category'])):
+            foreach($quest['category'] as $cat):
+                $i= 0;
+                DB::table('category_question')->insert(
+                    ['category_id' => $cat[$i],
+                    'question_id' => $question->id,
+                    "created_at" =>  date('Y-m-d H:i:s'),
+                    "updated_at" => date('Y-m-d H:i:s'),]
+                );
+                $i++;
+            endforeach;
+        endif;
+        if(!empty($quest['sub_category'])):
+            foreach($quest['sub_category'] as $sub_cat):
+                $i= 0;
+                DB::table('question_sub_category')->insert(
+                    ['sub_category_id' => $sub_cat[$i],
+                    'question_id' => $question->id,
+                    "created_at" =>  date('Y-m-d H:i:s'),
+                    "updated_at" => date('Y-m-d H:i:s'),]
+                );
+                $i++;
+            endforeach;
+        endif;
         $question->option()->create([
             'option_1' =>  $quest['option_1'],
             'option_2' =>  $quest['option_2'],
@@ -59,11 +86,6 @@ class QuestionController extends Controller
             'answer' =>  $quest['answer'],
             'explanation' =>  $quest['explanation']
         ]);
-        // foreach($quest['category'] as $qcat):
-        //     $question->category()->create([
-        //         'category_id' => $qcat
-        //     ]);
-        // endforeach;
         return back()->with('success', 'Successfully Added Category');
 
     }
@@ -110,6 +132,7 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        Question::destroy($question->id);
+        return back()->with('success', 'Successfully Added Category');
     }
 }

@@ -13,10 +13,10 @@ class SubCategoryQuestion extends Migration
      */
     public function up()
     {
-        Schema::create('sub_category_question', function (Blueprint $table) {
+        Schema::create('question_sub_category', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sub_category_id')->constrained();
-            $table->foreignId('question_id')->constrained();
+            $table->foreignId('sub_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class SubCategoryQuestion extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_category_question');
+        Schema::dropIfExists('question_sub_category');
     }
 }
