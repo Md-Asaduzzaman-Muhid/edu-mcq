@@ -1,3 +1,4 @@
+</div>
 @extends('user.layouts.app')
 
 @section('content')
@@ -9,7 +10,7 @@
                     <div class="statistics-item bg-info text-white text-center py-4">
                         <h3>Categories</h3>
 
-                        <h2 class="mb-0"><a href="{{url('').'/test/'.$cat->slug}}">{{$cat->name}}</a></h2>
+                        <h2 class="mb-0"><a href="{{url('').'/question/'.$cat->slug}}">{{$cat->name}}</a></h2>
                     </div>
                 </div>
             @endforeach

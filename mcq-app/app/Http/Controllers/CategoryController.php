@@ -43,6 +43,7 @@ class CategoryController extends Controller
         $cat = Purify::clean($request->all());
         $category = new Category();
         $category->name = $cat['category'];
+        $category->slug = str_slug($cat['category']);
         $category->save();
         return back()->with('success', 'Successfully Added Category');
     }
@@ -100,7 +101,7 @@ class CategoryController extends Controller
         $subcategory = new SubCategory();
         $subcategory->cat_id = $subcat['cat_id'];
         $subcategory->name = $subcat['sub_category'];
-        
+        $subcategory->slug = str_slug($subcat['sub_category']);
         $subcategory->save();
         return back()->with('success', 'Successfully Added Sub Category');
     }

@@ -24,7 +24,7 @@
                         <a href="{{ route('test') }}" class="nav-link ">Take A Test</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">Question Bank</a>
+                        <a href="{{ route('question.bank') }}" class="nav-link ">Question Bank</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

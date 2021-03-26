@@ -16,11 +16,14 @@ class TestController extends Controller
         // dd($categories);
         return view('user.pages.test.home',compact(['categories','questions']));  
     }
-    public function category($catgory)
+    public function category($slug)
     {
-        $categories= Category::all();
-        $questions= Question::all();
+        // $categories= Category::all();
+        // $questions= Question::all();
+        $category = Category::where('slug', '=', $slug)->first();
 
-        return view('user.pages.test.category_test',compact(['categories','questions']));  
+        $questions = $category->question()->paginate(10);
+        $rank = $questions->firstItem();
+        return view('user.pages.test.category_test',compact(['category','questions','rank']));  
     }
 }

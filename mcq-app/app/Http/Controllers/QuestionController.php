@@ -162,4 +162,20 @@ class QuestionController extends Controller
         Question::destroy($question->id);
         return back()->with('success', 'Successfully Added Category');
     }
+
+    public function questionBankHome()
+    {
+        $categories= Category::all();
+        $questions= Question::all();
+        // dd($categories);
+        return view('user.pages.question_bank.home',compact(['categories','questions']));  
+    }
+    public function questionBankCategory($slug)
+    {
+        $category = Category::where('slug', '=', $slug)->first();
+
+        $questions = $category->question()->paginate(10);
+        $rank = $questions->firstItem();
+        return view('user.pages.question_bank.category_question',compact(['category','questions','rank']));  
+    }
 }
