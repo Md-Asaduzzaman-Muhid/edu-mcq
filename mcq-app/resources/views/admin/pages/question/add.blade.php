@@ -9,11 +9,14 @@
             @csrf
             <div class="row">
                 <div class="col">
-                    <!-- <label for="option_1">Select Category</label>
-                    <select class="form-control" id="cat_id" name="cat_id" required>
-                        <option value=""> -- Select Category -- </option>
-                        <option value="1">One</option>
-                    </select> -->
+                    <!-- <div class="form-group">
+                        <input list="category_list" type = "text" name="category[]">
+                        <datalist id="category_list">
+                            <option value ="abc" >
+                            <option value ="abcd" >
+                            <option value ="abcdd" >
+                        </datalist>
+                    </div> -->
                     <div class="form-group">
                         <label><strong>Category :</strong></label><br>
                         <label><input type="checkbox" name="category[]" value="0"> No category</label>
@@ -24,12 +27,6 @@
                     </div>  
                 </div>
                 <div class="col">
-                    <!-- <label for="option_1">Select Sub Category</label>
-                    <select class="form-control" id="sub_cat_id" name="sub_cat_id" required>
-                        <option value=""> -- Select Sub Category -- </option>
-                        <option value="1">One</option>
-                    </select> -->
-
                     <div class="form-group">
                         <label><strong>Sub Category :</strong></label><br>
                         <label><input type="checkbox" name="sub_category[]" value="0"> No Sub Category</label>

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Question;
+use Carbon\Carbon;
+use Auth;
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class TestController extends Controller
 {
@@ -18,12 +22,24 @@ class TestController extends Controller
     }
     public function category($slug)
     {
-        // $categories= Category::all();
-        // $questions= Question::all();
+        // dd(Carbon::now()->toTimeString());
         $category = Category::where('slug', '=', $slug)->first();
 
         $questions = $category->question()->paginate(10);
         $rank = $questions->firstItem();
         return view('user.pages.test.category_test',compact(['category','questions','rank']));  
+    }
+    public function testTake(){
+        $user_id = Auth::user()->id;
+        if (!Schema::hasTable('user_test_'.$user_id.'')) :
+            Schema::create('user_test_'.$user_id.'', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('question_id');
+                $table->integer('selected_answer');
+                $table->integer('is_right');
+                $table->timestamps();
+            });
+        endif;
+        // Schema::dropIfExists('user_test_'.$user_id.'');
     }
 }

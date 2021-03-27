@@ -16,7 +16,6 @@
 
 <section class="test-section py-5">
     <div class="container">
-    <?php $i= 1; ?>
     @foreach($questions as $question)
         <div class="question-single border border-dark rounded mb-4 p-4">
             <h4>{{$rank++.'. '.$question->question}}</h4>

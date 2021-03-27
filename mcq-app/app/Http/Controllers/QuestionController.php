@@ -167,14 +167,12 @@ class QuestionController extends Controller
     {
         $categories= Category::all();
         $questions= Question::all();
-        // dd($categories);
         return view('user.pages.question_bank.home',compact(['categories','questions']));  
     }
     public function questionBankCategory($slug)
     {
         $category = Category::where('slug', '=', $slug)->first();
-
-        $questions = $category->question()->paginate(10);
+        $questions = $category->question()->paginate(25);
         $rank = $questions->firstItem();
         return view('user.pages.question_bank.category_question',compact(['category','questions','rank']));  
     }
