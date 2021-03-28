@@ -16,54 +16,54 @@
 </section>
 <section class="take-test-section">
     <div class="container">
-    <h4>Question</h4>
-        <form action="{{route('test.take')}}" method="post">
-            @csrf
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="answer" id="testAnswer1" value="option1">
-                <label class="form-check-label" for="testAnswer1">
-                    Default radio
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="answer" id="testAnswer2" value="option2">
-                <label class="form-check-label" for="testAnswer2">
-                    Second default radio
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="answer" id="testAnswer3" value="option3">
-                <label class="form-check-label" for="testAnswer3">
-                    Third default radio
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="answer" id="testAnswer4" value="option4">
-                <label class="form-check-label" for="testAnswer4">
-                    Fourth default radio
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary">Next Question</button>
-        </form>
+            <form action="{{route('test.take')}}" method="post" class="form">
+                @csrf
+                @foreach($questions as $question)
+                <div class="question-single question-{{$rank}}">
+                    <h4>{{$rank++.'. '.$question->question}}</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_{{$question->id}}" id="test_answer_1_{{$question->id}}" value="1">
+                        <label class="form-check-label" for="test_answer_1_{{$question->id}}">
+                        {{$question->option->option_1}}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_{{$question->id}}" id="test_answer_2_{{$question->id}}" value="2">
+                        <label class="form-check-label" for="test_answer_2_{{$question->id}}">
+                        {{$question->option->option_2}}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_{{$question->id}}" id="test_answer_3_{{$question->id}}" value="3">
+                        <label class="form-check-label" for="test_answer_3_{{$question->id}}">
+                        {{$question->option->option_3}}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question_{{$question->id}}" id="test_answer_4_{{$question->id}}" value="4">
+                        <label class="form-check-label" for="test_answer_4_{{$question->id}}">
+                        {{$question->option->option_4}}
+                        </label>
+                    </div>
+                    
+                </div>
+                @endforeach
+                <button type="submit" class="btn btn-primary">End Test</button>
+            </form> 
     </div>
 </section>
-<section class="test-section py-5">
-    <div class="container">
-    @foreach($questions as $question)
-        <div class="question-single border border-dark rounded mb-4 p-4">
-            <h4>{{$rank++.'. '.$question->question}}</h4>
-            <ol class="option-list" type="A">
-                <li class="pr-4 <?php if($question->answer->answer == 1): echo'text-success font-weight-bold'; endif; ?>">{{$question->option->option_1}}</li>
-                <li class="pr-4 <?php if($question->answer->answer == 2): echo'text-success font-weight-bold'; endif; ?>">>{{$question->option->option_2}}</li>
-                <li class="pr-4 <?php if($question->answer->answer == 3): echo'text-success font-weight-bold'; endif; ?>">>{{$question->option->option_3}}</li>
-                <li class="pr-4 <?php if($question->answer->answer == 4): echo'text-success font-weight-bold'; endif; ?>">>{{$question->option->option_4}}</li>
-            </ol>
-            <p><span class="font-weight-bold">Explanation:</span> {{$question->answer->explanation}}</p>
-        </div>
-    @endforeach
-    {{ $questions->links('pagination::bootstrap-4') }}
-    </div>
+
+
+  
    <script>
+  
+        // var qt = JSON.parse('<?php echo json_encode($questions) ?>');
+        // console.log(qt[0].answer);
+        // console.log(qt[0].answer.answer);
+
+
+
+
         // let dateNow = new Date();
         // let hour = dateNow.getUTCHours();
         // let minute = dateNow.getUTCMinutes();
