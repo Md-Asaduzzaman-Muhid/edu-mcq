@@ -2,3 +2,36 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
+.user-nav{
+    // border: 2px solid $primary;
+    border-radius: 12px;
+    // padding: 8px 25px !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    background: $primary;
+    color: #fff !important;
+
+}
+.navbar-nav .nav-link {
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+.navbar-nav .nav-item:not(:last-child){
+    margin-right: 10px;
+}
+.study-equal-section .image-1{
+    background-image: url('/public/img/user/static/study1.jpg');
+}
+.min-h-300{
+    min-height: 300px;
+}
+.btn-common{
+    border-radius: 20px !important;
+    padding: 7px 25px !important;
+    background-color: #fff !important;
+    &:hover{
+        color: #fff !important;
+        background-color: $primary !important;
+    }
+}

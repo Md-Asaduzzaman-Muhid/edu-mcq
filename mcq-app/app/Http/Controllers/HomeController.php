@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Question;
+use DB;
 
 class HomeController extends Controller
 {
@@ -29,10 +30,10 @@ class HomeController extends Controller
     }
     public function userHome()
     {
-        $categories= Category::all();
-       
-        $questions = Question::all();
+        $categories= DB::table("categories")->count();
+        $total_user = DB::table("users")->count();
+        $questions = DB::table("questions")->count();
         //  dd($questions[0]->answer);
-        return view('user.home',compact(['categories','questions']));
+        return view('user.home',compact(['categories','questions','total_user']));
     }
 }

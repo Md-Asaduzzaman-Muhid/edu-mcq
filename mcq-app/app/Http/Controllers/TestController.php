@@ -33,8 +33,40 @@ class TestController extends Controller
         return view('user.pages.test.category_test',compact(['category','questions','rank']));  
     }
     public function testTake(Request $request){
-        $user_id = Auth::user()->id;
-        dd($request);
+        $result= $request->all();
+        // $user_id = Auth::user()->id;
+        $category = Category::where('id', '=', $result['category'])->first();
+        $questions = $category->question()->get();
+        // dd($result);
+        $question_answered = $request->get('question');
+        // dd($question_answered);
+        $point =0;
+        if(isset($question_answered)&& !empty($question_answered)):
+            foreach($question_answered as $qid=>$oneLeadOptions):
+                foreach($oneLeadOptions as $opt):
+                    foreach($questions as $dbquestion):
+                        if($dbquestion->id == $qid):
+                            if($dbquestion->answer->answer == $opt):
+                                $point++;
+                            endif;
+                        endif;
+                    endforeach; 
+                endforeach;
+            endforeach;
+            DB::table('user_test_result')->insert(
+                ['user_id' => Auth::user()->id ?? 0,
+                'category_id' => $result['category'],
+                'sub_category_id' => 0,
+                'result' => $point,
+                "created_at" =>  date('Y-m-d H:i:s'),
+                "updated_at" => date('Y-m-d H:i:s'),]
+            );
+        else:
+            return redirect()->back()->with('error', 'Please answer question and submit');  
+        endif;
+    
+        return redirect()->route('test.result');
+        // return redirect()->route('test.result');
         // if (!Schema::hasTable('user_test_'.$user_id.'')) :
         //     Schema::create('user_test_'.$user_id.'', function (Blueprint $table) {
         //         $table->increments('id');
@@ -47,5 +79,10 @@ class TestController extends Controller
         //     DB::table('user_test_'.$user_id.'')->truncate();
         // endif;
         // Schema::dropIfExists('user_test_'.$user_id.'');
+    }
+    public function testResult(){
+        $user_id = Auth::user()->id;
+        $test_result = DB::table('user_test_result')->where('user_id', $user_id)->orderBy('id', 'DESC')->get();
+        return view('user.pages.test.result',compact(['test_result']));  
     }
 }
