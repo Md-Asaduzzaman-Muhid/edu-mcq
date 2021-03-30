@@ -30,7 +30,7 @@
                 @csrf
                 <input type="hidden" id="category" name="category" value="{{$category->id}}">
                 @foreach($questions as $question)
-                <div class="question-single question-{{$rank}}">
+                <div class="question-single mb-md-5 mb-3">
                     <h4>{{$rank++.'. '.$question->question}}</h4>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="question[{{$question->id}}][]" id="test_answer_1_{{$question->id}}" value="1">
@@ -59,7 +59,7 @@
                     
                 </div>
                 @endforeach
-                <button type="submit" class="btn btn-primary">End Test</button>
+                <button type="submit" class="btn">End Test</button>
             </form> 
     </div>
 </section>

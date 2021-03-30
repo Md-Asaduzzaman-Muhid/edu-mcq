@@ -26,6 +26,7 @@ Route::get('/test', 'App\Http\Controllers\TestController@index')->middleware('au
 Route::get('/test/{slug}', 'App\Http\Controllers\TestController@category')->middleware('auth')->name('test.category');
 Route::post('/test/take', 'App\Http\Controllers\TestController@testTake')->middleware('auth')->name('test.take');
 Route::get('result', 'App\Http\Controllers\TestController@testResult')->middleware('auth')->name('test.result');
+Route::get('answer', 'App\Http\Controllers\TestController@testAnswer')->middleware('auth')->name('test.answer');
 
 Route::get('/question', 'App\Http\Controllers\QuestionController@questionBankHome')->middleware('auth')->name('question.bank');
 Route::get('/question/{slug}', 'App\Http\Controllers\QuestionController@questionBankCategory')->middleware('auth')->name('question.category');

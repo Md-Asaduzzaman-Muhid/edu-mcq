@@ -1,7 +1,7 @@
 <header class="header bg-white shadow-sm">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('img/admin/logo.png') }}" alt="logo" class="img-fluid w-50">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -18,6 +18,7 @@
                     <li class="nav-item">
                         <a href="{{ route('test') }}" class="nav-link ">Take A Test</a>
                     </li>
+                    
                     <li class="nav-item">
                         <a href="{{ route('question.bank') }}" class="nav-link ">Question Bank</a>
                     </li>
