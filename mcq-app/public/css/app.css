@@ -49,6 +49,54 @@
   background-color: #6cb2eb !important;
 }
 
+.submit-btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 20px;
+  line-height: 2;
+  padding: 3px 25px;
+  border: 2px solid #6cb2eb;
+  background-color: #6cb2eb;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  min-width: 300px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.submit-btn:hover {
+  color: #6cb2eb;
+  background-color: #fff;
+  border: 2px solid #6cb2eb;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.login-section {
+  background: linear-gradient(to left, #fff 50%, #6cb2eb 50%);
+}
+
+.login-form input, .register-form input {
+  display: inline !important;
+  max-width: 320px !important;
+}
+
+.form-control {
+  border: transparent !important;
+  border-bottom: 2px solid #ced4da !important;
+}
+
+.register-section {
+  background: linear-gradient(to left, #fff 50%, #6cb2eb 50%);
+}
+
+.register-container {
+  background: rgba(255, 255, 255, 0.9);
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

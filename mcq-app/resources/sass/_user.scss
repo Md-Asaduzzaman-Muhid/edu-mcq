@@ -35,3 +35,46 @@
         background-color: $primary !important;
     }
 }
+.submit-btn{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 20px ;
+    line-height: 2;
+    padding: 3px 25px;
+    border: 2px solid $primary ;
+    background-color: $primary ;
+    color: #fff ;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    min-width: 300px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    &:hover{
+        color: $primary ;
+        background-color: #fff ;
+        border: 2px solid $primary ;
+    }
+}
+.login-container{
+    background: rgb(255 255 255 / 90%);
+}
+.login-section{
+    background: linear-gradient(to left, #fff 50%, $primary 50%);
+}
+.login-form,.register-form{
+    input{
+        display: inline !important;
+        max-width: 320px !important;
+    }
+}
+.form-control{
+    border: transparent !important;
+    border-bottom: 2px solid #ced4da !important;
+}
+.register-section{
+    background: linear-gradient(to left, #fff 50%, $primary 50%);
+}
+.register-container{
+    background: rgb(255 255 255 / 90%);
+}
