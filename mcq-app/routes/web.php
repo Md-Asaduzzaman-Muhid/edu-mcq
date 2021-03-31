@@ -15,11 +15,15 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::view('/', 'welcome');
 Auth::routes();
 
-Route::get('/login/admin', 'App\Http\Controllers\Auth\LoginController@showAdminLoginForm');
-// Route::get('/login/moderator', 'App\Http\Controllers\Auth\LoginController@showModeratorLoginForm');
-Route::get('/register/admin', 'App\Http\Controllers\Auth\RegisterController@showAdminRegisterForm');
-// Route::get('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@showModeratorRegisterForm');
+Route::get('/login/admin', 'App\Http\Controllers\Auth\LoginController@showAdminLoginForm')->name('admin.login');
+Route::post('/login/admin', 'App\Http\Controllers\Auth\LoginController@adminLogin');
+Route::get('/register/admin', 'App\Http\Controllers\Auth\RegisterController@showAdminRegisterForm')->name('admin.register');
+Route::post('/register/admin', 'App\Http\Controllers\Auth\RegisterController@createAdmin');
 
+Route::get('/login/moderator', 'App\Http\Controllers\Auth\LoginController@showModeratorLoginForm');
+Route::get('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@showModeratorRegisterForm');
+Route::post('/login/moderator', 'App\Http\Controllers\Auth\LoginController@ModeratorLogin');
+Route::post('/register/moderator', 'App\Http\Controllers\Auth\RegisterController@createModerator');
 
 Route::get('home', 'App\Http\Controllers\HomeController@userHome')->middleware('auth')->name('home');
 Route::get('/test', 'App\Http\Controllers\TestController@index')->middleware('auth')->name('test');
@@ -31,7 +35,7 @@ Route::get('answer', 'App\Http\Controllers\TestController@testAnswer')->middlewa
 Route::get('/question', 'App\Http\Controllers\QuestionController@questionBankHome')->middleware('auth')->name('question.bank');
 Route::get('/question/{slug}', 'App\Http\Controllers\QuestionController@questionBankCategory')->middleware('auth')->name('question.category');
 
-Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
+Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:web,admin'], function(){
     Route::view('/', 'admin.pages.dashboard');
     Route::resource('category', 'App\Http\Controllers\CategoryController');
     Route::post('sub_category', 'App\Http\Controllers\CategoryController@storeSubCat')->name('sub_cat');
