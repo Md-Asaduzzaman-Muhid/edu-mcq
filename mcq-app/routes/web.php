@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'welcome');
+Route::view('/', 'home');
 Auth::routes();
 
 Route::get('/login/admin', 'App\Http\Controllers\Auth\LoginController@showAdminLoginForm')->name('admin.login');
