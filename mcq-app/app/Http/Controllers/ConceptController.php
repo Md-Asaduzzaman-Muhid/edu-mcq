@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Concept;
 use Illuminate\Http\Request;
+
+use Stevebauman\Purify\Facades\Purify;
 
 class ConceptController extends Controller
 {
@@ -14,7 +18,9 @@ class ConceptController extends Controller
      */
     public function index()
     {
-        //
+        $categories= Category::all();
+        $sub_categories= SubCategory::all();
+        return view('admin.pages.concept.home',compact(['categories','sub_categories']));
     }
 
     /**
@@ -24,7 +30,9 @@ class ConceptController extends Controller
      */
     public function create()
     {
-        //
+        $categories= Category::all();
+        $sub_categories= SubCategory::all();
+        return view('admin.pages.concept.add',compact(['categories','sub_categories']));
     }
 
     /**
@@ -35,7 +43,8 @@ class ConceptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quest = Purify::clean($request->all());
+        dd($quest);
     }
 
     /**

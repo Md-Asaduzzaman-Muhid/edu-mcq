@@ -17,6 +17,9 @@ class SubCategory extends Model
     {
         return $this->belongsToMany(Question::class);
     }
-    
+    public function concept()
+    {
+        return $this->hasOne(Concept::class);
+    }
     // use HasFactory;
 }

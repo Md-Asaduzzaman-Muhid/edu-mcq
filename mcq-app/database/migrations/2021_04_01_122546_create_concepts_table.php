@@ -15,6 +15,10 @@ class CreateConceptsTable extends Migration
     {
         Schema::create('concepts', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('cat_id');
+            $table->bigInteger('sub_cat_id');
+            $table->char('title', 150);
+            $table->longText('description');
             $table->timestamps();
         });
     }

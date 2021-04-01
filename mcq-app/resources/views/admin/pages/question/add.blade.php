@@ -9,14 +9,7 @@
             @csrf
             <div class="row">
                 <div class="col">
-                    <!-- <div class="form-group">
-                        <input list="category_list" type = "text" name="category[]">
-                        <datalist id="category_list">
-                            <option value ="abc" >
-                            <option value ="abcd" >
-                            <option value ="abcdd" >
-                        </datalist>
-                    </div> -->
+         
                     <div class="form-group">
                         <label><strong>Category :</strong></label><br>
                         <label><input type="checkbox" name="category[]" value="0"> No category</label>

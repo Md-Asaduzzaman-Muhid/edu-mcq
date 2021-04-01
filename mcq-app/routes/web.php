@@ -42,4 +42,5 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'auth:web,admin'], 
     Route::post('sub_category/destroy{id}', 'App\Http\Controllers\CategoryController@destroySubCat')->name('sub_cat.destroy');
 
     Route::resource('question', 'App\Http\Controllers\QuestionController');
+    Route::resource('concept', 'App\Http\Controllers\ConceptController');
 });

@@ -13,7 +13,9 @@
     <link rel="stylesheet" href=" {{url('css/overlayscrol/OverlayScrollbars.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{url('css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{url('css/summernote-bs4.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
 
@@ -53,5 +55,12 @@
 
     <!-- PAGE SCRIPTS -->
     <script src="{{url('js/dashboard2.js')}}"></script>
+    <script src="{{url('js/summernote-bs4.min.js')}}"></script>
+    <script>
+        $(function () {
+            // Summernote
+            $('.textarea').summernote()
+        })
+    </script>
     </body>
 </html>
